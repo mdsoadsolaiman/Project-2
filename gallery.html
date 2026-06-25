@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About | Hello World</title>
+  <title>Gallery | Hello World</title>
   <style>
     :root {
       color-scheme: dark;
@@ -25,7 +25,7 @@
       margin: 0;
       display: grid;
       place-items: center;
-      padding: 24px;
+      padding: 96px 24px 24px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background:
@@ -81,8 +81,8 @@
     }
 
     main {
-      width: min(92vw, 840px);
-      padding: clamp(28px, 7vw, 74px);
+      width: min(92vw, 980px);
+      padding: clamp(28px, 6vw, 64px);
       position: relative;
       isolation: isolate;
       border: 1px solid var(--line);
@@ -117,7 +117,7 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(3.25rem, 11vw, 8rem);
+      font-size: clamp(3.25rem, 10vw, 7.5rem);
       line-height: 0.92;
       letter-spacing: 0;
       text-wrap: balance;
@@ -131,36 +131,112 @@
       -webkit-background-clip: text;
     }
 
-    p {
-      max-width: 620px;
-      margin: 28px auto 0;
+    .intro {
+      max-width: 640px;
+      margin: 24px auto 36px;
       color: var(--muted);
       font-size: clamp(1rem, 2.4vw, 1.18rem);
       line-height: 1.7;
     }
 
-    .sparkline {
-      width: min(340px, 70vw);
-      height: 3px;
-      margin: 34px auto 0;
-      border-radius: 999px;
-      background: linear-gradient(90deg, transparent, var(--accent), var(--accent-two), var(--accent-three), transparent);
-      box-shadow: 0 0 28px rgba(98, 210, 255, 0.52);
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .tile {
+      min-height: 168px;
+      padding: 18px;
+      display: flex;
+      align-items: end;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      text-align: left;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+
+    .tile::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, 0.62)),
+        var(--tile-art);
+      transition: transform 220ms ease;
+    }
+
+    .tile:hover::before {
+      transform: scale(1.05);
+    }
+
+    .tile span {
+      position: relative;
+      color: var(--ink);
+      font-size: 1rem;
+      font-weight: 850;
+    }
+
+    .tile:nth-child(1) {
+      --tile-art: radial-gradient(circle at 30% 28%, #fff5bd, transparent 28%), linear-gradient(135deg, #1a4b7a, #101b2b 58%, #162616);
+    }
+
+    .tile:nth-child(2) {
+      --tile-art: radial-gradient(circle at 70% 22%, #ff9cb7, transparent 30%), linear-gradient(135deg, #10271f, #183658 54%, #0a0f1d);
+    }
+
+    .tile:nth-child(3) {
+      --tile-art: radial-gradient(circle at 46% 34%, #7ee4ff, transparent 32%), linear-gradient(135deg, #2a1530, #10243d 52%, #172616);
+    }
+
+    .tile:nth-child(4) {
+      --tile-art: radial-gradient(circle at 22% 70%, #f8d86f, transparent 28%), linear-gradient(135deg, #101b2b, #263a2d 60%, #121620);
+    }
+
+    .tile:nth-child(5) {
+      --tile-art: radial-gradient(circle at 78% 70%, #62d2ff, transparent 30%), linear-gradient(135deg, #251827, #183052 54%, #102016);
+    }
+
+    .tile:nth-child(6) {
+      --tile-art: radial-gradient(circle at 50% 50%, #f27c9b, transparent 28%), linear-gradient(135deg, #092025, #1f2b40 58%, #192414);
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding-top: 124px;
+      }
+
+      nav {
+        width: min(92vw, 420px);
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <nav aria-label="Primary navigation">
     <a href="index.html">Home</a>
-    <a href="about.html" aria-current="page">About</a>
-    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
+    <a href="gallery.html" aria-current="page">Gallery</a>
     <a href="contact.html">Contact</a>
   </nav>
-  <main aria-labelledby="about-title">
-    <p class="eyebrow">Small page, big entrance</p>
-    <h1 id="about-title">About <span>This Site</span></h1>
-    <p>Ok ok</p>
-    <div class="sparkline" aria-hidden="true"></div>
+  <main aria-labelledby="gallery-title">
+    <p class="eyebrow">Collected moments</p>
+    <h1 id="gallery-title">Gallery <span>Lights</span></h1>
+    <p class="intro">A small visual wall of luminous panels, built with pure HTML and CSS so the page stays fast, portable, and ready to open directly.</p>
+    <section class="gallery-grid" aria-label="Gallery highlights">
+      <div class="tile"><span>Morning Signal</span></div>
+      <div class="tile"><span>Neon Garden</span></div>
+      <div class="tile"><span>Skyline Pulse</span></div>
+      <div class="tile"><span>Golden Field</span></div>
+      <div class="tile"><span>Blue Current</span></div>
+      <div class="tile"><span>Rose Horizon</span></div>
+    </section>
   </main>
 </body>
 </html>
