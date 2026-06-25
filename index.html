@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f7f4ea;
+      --muted: #b9c1c9;
+      --panel: rgba(9, 14, 24, 0.66);
+      --line: rgba(255, 255, 255, 0.16);
+      --accent: #f8d86f;
+      --accent-two: #62d2ff;
+      --accent-three: #f27c9b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 20%, rgba(98, 210, 255, 0.32), transparent 30%),
+        radial-gradient(circle at 82% 28%, rgba(242, 124, 155, 0.24), transparent 26%),
+        linear-gradient(135deg, #0a0f1d 0%, #101b2b 42%, #172616 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: radial-gradient(circle at center, black, transparent 78%);
+    }
+
+    main {
+      width: min(92vw, 840px);
+      padding: clamp(28px, 7vw, 74px);
+      position: relative;
+      isolation: isolate;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
+      backdrop-filter: blur(22px);
+      text-align: center;
+    }
+
+    main::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: -1;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(120deg, var(--accent), var(--accent-two), var(--accent-three));
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      opacity: 0.72;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(4rem, 14vw, 9.5rem);
+      line-height: 0.9;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    h1 span {
+      display: block;
+      color: transparent;
+      background: linear-gradient(90deg, #fff5bd, #7ee4ff 45%, #ff9cb7);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    p {
+      max-width: 590px;
+      margin: 28px auto 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.4vw, 1.22rem);
+      line-height: 1.7;
+    }
+
+    .sparkline {
+      width: min(340px, 70vw);
+      height: 3px;
+      margin: 34px auto 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent-two), var(--accent-three), transparent);
+      box-shadow: 0 0 28px rgba(98, 210, 255, 0.52);
+    }
+  </style>
+</head>
+<body>
+  <main aria-labelledby="hello-title">
+    <p class="eyebrow">First signal online</p>
+    <h1 id="hello-title">Hello <span>World</span></h1>
+    <p>A tiny page with a little ceremony: glass, light, crisp type, and just enough drama to make the classic greeting feel dressed for opening night.</p>
+    <div class="sparkline" aria-hidden="true"></div>
+  </main>
+</body>
+</html>
