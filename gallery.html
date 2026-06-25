@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Hello World</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f7f4ea;
+      --muted: #b9c1c9;
+      --panel: rgba(9, 14, 24, 0.66);
+      --line: rgba(255, 255, 255, 0.16);
+      --accent: #f8d86f;
+      --accent-two: #62d2ff;
+      --accent-three: #f27c9b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 96px 24px 24px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 20%, rgba(98, 210, 255, 0.32), transparent 30%),
+        radial-gradient(circle at 82% 28%, rgba(242, 124, 155, 0.24), transparent 26%),
+        linear-gradient(135deg, #0a0f1d 0%, #101b2b 42%, #172616 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: radial-gradient(circle at center, black, transparent 78%);
+    }
+
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(9, 14, 24, 0.58);
+      backdrop-filter: blur(18px);
+      transform: translateX(-50%);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+    }
+
+    nav a {
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      font-weight: 750;
+      text-decoration: none;
+      transition: color 180ms ease, background 180ms ease;
+    }
+
+    nav a:hover,
+    nav a[aria-current="page"] {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    main {
+      width: min(92vw, 980px);
+      padding: clamp(28px, 6vw, 64px);
+      position: relative;
+      isolation: isolate;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
+      backdrop-filter: blur(22px);
+      text-align: center;
+    }
+
+    main::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: -1;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(120deg, var(--accent), var(--accent-two), var(--accent-three));
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      opacity: 0.72;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3.25rem, 10vw, 7.5rem);
+      line-height: 0.92;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    h1 span {
+      display: block;
+      color: transparent;
+      background: linear-gradient(90deg, #fff5bd, #7ee4ff 45%, #ff9cb7);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .intro {
+      max-width: 640px;
+      margin: 24px auto 36px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.4vw, 1.18rem);
+      line-height: 1.7;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .tile {
+      min-height: 168px;
+      padding: 18px;
+      display: flex;
+      align-items: end;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      text-align: left;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+
+    .tile::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, 0.62)),
+        var(--tile-art);
+      transition: transform 220ms ease;
+    }
+
+    .tile:hover::before {
+      transform: scale(1.05);
+    }
+
+    .tile span {
+      position: relative;
+      color: var(--ink);
+      font-size: 1rem;
+      font-weight: 850;
+    }
+
+    .tile:nth-child(1) {
+      --tile-art: radial-gradient(circle at 30% 28%, #fff5bd, transparent 28%), linear-gradient(135deg, #1a4b7a, #101b2b 58%, #162616);
+    }
+
+    .tile:nth-child(2) {
+      --tile-art: radial-gradient(circle at 70% 22%, #ff9cb7, transparent 30%), linear-gradient(135deg, #10271f, #183658 54%, #0a0f1d);
+    }
+
+    .tile:nth-child(3) {
+      --tile-art: radial-gradient(circle at 46% 34%, #7ee4ff, transparent 32%), linear-gradient(135deg, #2a1530, #10243d 52%, #172616);
+    }
+
+    .tile:nth-child(4) {
+      --tile-art: radial-gradient(circle at 22% 70%, #f8d86f, transparent 28%), linear-gradient(135deg, #101b2b, #263a2d 60%, #121620);
+    }
+
+    .tile:nth-child(5) {
+      --tile-art: radial-gradient(circle at 78% 70%, #62d2ff, transparent 30%), linear-gradient(135deg, #251827, #183052 54%, #102016);
+    }
+
+    .tile:nth-child(6) {
+      --tile-art: radial-gradient(circle at 50% 50%, #f27c9b, transparent 28%), linear-gradient(135deg, #092025, #1f2b40 58%, #192414);
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding-top: 124px;
+      }
+
+      nav {
+        width: min(92vw, 420px);
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav aria-label="Primary navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="gallery.html" aria-current="page">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <main aria-labelledby="gallery-title">
+    <p class="eyebrow">Collected moments</p>
+    <h1 id="gallery-title">Gallery <span>Lights</span></h1>
+    <p class="intro">A small visual wall of luminous panels, built with pure HTML and CSS so the page stays fast, portable, and ready to open directly.</p>
+    <section class="gallery-grid" aria-label="Gallery highlights">
+      <div class="tile"><span>Morning Signal</span></div>
+      <div class="tile"><span>Neon Garden</span></div>
+      <div class="tile"><span>Skyline Pulse</span></div>
+      <div class="tile"><span>Golden Field</span></div>
+      <div class="tile"><span>Blue Current</span></div>
+      <div class="tile"><span>Rose Horizon</span></div>
+    </section>
+  </main>
+</body>
+</html>
